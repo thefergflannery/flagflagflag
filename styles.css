@@ -1,0 +1,91 @@
+/* Import Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500&display=swap");
+
+/* CSS Variables */
+:root {
+  --primary-color: #ecad29;
+  --text-color: #ffffffdd;
+  --background-color: #1a1a1a;
+}
+
+/* General Styles */
+body {
+  margin: 0;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: "Inter", sans-serif;
+  overflow: hidden;
+}
+
+.card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 300px;
+  height: 200px;
+  opacity: 1.0;
+}
+
+.input-container {
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  gap: 10px;
+  z-index: 100;
+}
+
+#guess-input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#submit-guess, #pass {
+  padding: 10px;
+  background-color: var(--primary-color);
+  border: none;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#feedback, #score, #round, #timer {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  color: white;
+  font-size: 24px;
+}
+
+#feedback {
+  top: 80%;
+}
+
+#score {
+  top: 85%;
+}
+
+#round {
+  top: 90%;
+}
+
+#timer {
+  top: 10%;
+}
+
+nav .title {
+  font-size: 36px;
+  font-weight: bold;
+  text-transform: uppercase;
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
