@@ -1,11 +1,16 @@
 /* Import Google Fonts */
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
 
 /* CSS Variables */
 :root {
-  --primary-color: #ecad29;
+  --primary-color: #ff0000;
   --text-color: #ffffffdd;
   --background-color: #1a1a1a;
+  --correct-color: #4caf50;
+  --wrong-color: #f44336;
+  --button-bg: #2d2d2d;
+  --button-hover-bg: #3e3e3e;
+  --shadow-color: rgba(0, 0, 0, 0.25);
 }
 
 /* General Styles */
@@ -13,79 +18,196 @@ body {
   margin: 0;
   background-color: var(--background-color);
   color: var(--text-color);
-  font-family: "Inter", sans-serif;
+  font-family: "Bebas Neue", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
   overflow: hidden;
 }
 
-.card {
+/* Start Page Styles */
+.start-container {
+  text-align: center;
+  padding: 20px;
+}
+
+.start-container h1 {
+  font-size: 60px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: rgb(255, 208, 0);
+}
+
+.start-container p {
+  font-size: 20px;
+  margin: 20px 0;
+}
+
+#start-button {
+  padding: 10px 20px;
+  background-color: var(--button-bg);
+  border: none;
+  color: rgb(255, 0, 0);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  box-shadow: 0 4px 8px var(--shadow-color);
+}
+
+#start-button:hover {
+  background-color: var(--button-hover-bg);
+}
+
+/* Game Page Styles */
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+}
+
+.title-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+nav .title {
+  font-size: 60px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: rgb(255, 208, 0);
+}
+
+#timer-container {
+  position: relative;
+  width: 60px;
+  height: 60px;
+}
+
+svg {
+  width: 60px;  
+  height: 60px;
+}
+
+circle {
+  fill: none;
+  stroke: var(--primary-color);
+  stroke-width: 4;
+  animation: flash 1s infinite;
+}
+
+#timer {
+  stroke-dasharray: 176;
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1s linear;
+}
+
+#timer-text {
   position: absolute;
-  left: 50%;
   top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
+  font-size: 24px;
+  color: rgb(255, 0, 0);
+  font-weight: bold;
+  animation: flash 1s infinite;
+}
+
+/* Flash animation */
+@keyframes flash {
+  0%, 100% { opacity: 1; }
+  2% { opacity: 0.1; }
+}
+
+#timer-container.flash #timer-text .circle {
+  animation: flash 1s infinite;
+}
+
+.card {
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
-  width: 300px;
-  height: 200px;
-  opacity: 1.0;
+  width: 600px;
+  height: 300px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px var(--shadow-color);
 }
 
 .input-container {
-  position: absolute;
-  top: 70%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   display: flex;
   gap: 10px;
   z-index: 100;
+  margin-top: 20px;
 }
 
 #guess-input {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  background-color: var(--button-bg);
+  color: white;
+  outline: none;
 }
 
-#submit-guess, #pass {
-  padding: 10px;
-  background-color: var(--primary-color);
+#submit-guess, #restart-game {
+  padding: 10px 20px;
+  background-color: var(--button-bg);
   border: none;
   color: white;
   border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.3s;
+  box-shadow: 0 4px 8px var(--shadow-color);
 }
 
-#feedback, #score, #round, #timer {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 100;
-  color: white;
-  font-size: 24px;
+#submit-guess:hover, #restart-game:hover {
+  background-color: var(--button-hover-bg);
 }
 
 #feedback {
-  top: 80%;
+  margin-top: 20px;
+  z-index: 100;
+  color: white;
+  font-size: 34px;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+#score, #round {
+  z-index: 100;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 10px;
 }
 
 #score {
-  top: 85%;
+  color: rgb(0, 170, 255);
+  font-size: 44px;
 }
 
 #round {
-  top: 90%;
+  font-size: 20px;
 }
 
-#timer {
-  top: 10%;
-}
-
-nav .title {
-  font-size: 36px;
+#multiplier {
+  z-index: 100;
+  color: white;
+  font-size: 24px;
   font-weight: bold;
-  text-transform: uppercase;
-  position: absolute;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+  margin-top: 10px;
+}
+
+.logo {
+  margin-top: 20px;
+}
+
+.logo img {
+  width: 50px;
+
 }

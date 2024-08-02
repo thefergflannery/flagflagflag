@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guess the Flag</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav>
+    <div class="title-container">
+      <div class="title">FLAG FLAG FLAG</div>
+      <div id="timer-container">
+        <svg>
+          <circle cx="30" cy="30" r="28"></circle>
+          <circle id="timer" cx="30" cy="30" r="28"></circle>
+        </svg>
+        <div id="timer-text">30</div>
+      </div>
+    </div>
+  </nav>
+  <div id="demo"></div>
+  <div class="input-container">
+    <select id="guess-input">
+      <!-- Country options will be added here dynamically -->
+    </select>
+    <button id="submit-guess">Submit</button>
+  </div>
+  <div id="feedback"></div>
+  <div id="score">Score: 0</div>
+  <div id="round">Round: 1/10</div>
+  <button id="restart-game" style="display: none;">Restart Game</button>
+  <p></p>
+  <div class="logo">
+    <img src="https://i.ibb.co/pygB5wR/logo.png" alt="Logo"/>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
