@@ -10,11 +10,16 @@
   <div class="title-container">
     <h1>FLAG FLAG FLAG</h1>
     <p>You have 10 rounds of 30 seconds to Guess the Flag. Points are scored based on how quickly you can answer.</p>
+    <div id="high-score">High Score: 0</div>
     <button id="start-button">Start Game</button>
   </div>
   <script>
-    document.getElementById('start-button').addEventListener('click', () => {
-      window.location.href = 'game.html';
+    document.addEventListener('DOMContentLoaded', () => {
+      const hs = localStorage.getItem('highScore') || 0;
+      document.getElementById('high-score').textContent = `High Score: ${hs}`;
+      document.getElementById('start-button').addEventListener('click', () => {
+        window.location.href = 'game.html';
+      });
     });
   </script>
     <div class="logo">
