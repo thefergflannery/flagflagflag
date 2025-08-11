@@ -16,7 +16,7 @@
 /* General Styles */
 body {
   margin: 0;
-  background-color: var(--background-color);
+  background: radial-gradient(circle at top, var(--background-color), #000000);
   color: var(--text-color);
   font-family: "Bebas Neue", sans-serif;
   display: flex;
@@ -58,6 +58,7 @@ body {
 
 #start-button:hover {
   background-color: var(--button-hover-bg);
+  transform: scale(1.05);
 }
 
 /* Game Page Styles */
@@ -197,9 +198,15 @@ circle {
 
 #multiplier {
   z-index: 100;
-  color: white;
+  color: #ff9800;
   font-size: 24px;
   font-weight: bold;
+  margin-top: 10px;
+}
+
+#high-score {
+  color: rgb(0, 170, 255);
+  font-size: 32px;
   margin-top: 10px;
 }
 

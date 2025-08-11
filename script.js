@@ -13,6 +13,13 @@ document.addEventListener('DOMContentLoaded', () => {
   let timeLeft = timeLimit;
   let comboMultiplier = 1;
   let consecutiveCorrectAnswers = 0;
+  const maxMultiplier = 5;
+
+  const updateMultiplier = () => {
+    _('multiplier').textContent = `Combo: x${comboMultiplier}`;
+  };
+
+  updateMultiplier();
 
   // Fetch countries data from JSON file
   const fetchCountriesData = async () => {
@@ -63,10 +70,15 @@ document.addEventListener('DOMContentLoaded', () => {
         _('feedback').style.opacity = 1;
         consecutiveCorrectAnswers = 0;
         comboMultiplier = 1;
-        _('multiplier').textContent = `Combo Multiplier: x${comboMultiplier}`;
+        updateMultiplier();
         _('timer-container').classList.remove('flash'); // Remove flash class when time is up
         if (round >= totalRounds) {
-          _('feedback').textContent += ` Game over! Your final score is ${score}.`;
+          let highScore = parseInt(localStorage.getItem('highScore')) || 0;
+          if (score > highScore) {
+            localStorage.setItem('highScore', score);
+            highScore = score;
+          }
+          _('feedback').textContent += ` Game over! Your final score is ${score}. High Score: ${highScore}.`;
           _('restart-game').style.display = 'block'; // Show restart button
         } else {
           updateRound();
@@ -95,16 +107,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const correctAnswer = countriesData[currentIndex].country.toLowerCase();
 
     if (userGuess === correctAnswer) {
-      score += timeLeft; // Score based on remaining time
+      consecutiveCorrectAnswers++;
+      comboMultiplier = Math.min(maxMultiplier, consecutiveCorrectAnswers);
+      score += timeLeft * comboMultiplier; // Score based on remaining time and multiplier
       _('feedback').style.color = 'var(--correct-color)';
       _('feedback').textContent = 'Correct!';
     } else {
       _('feedback').style.color = 'var(--wrong-color)';
       _('feedback').textContent = `Wrong! The correct answer was ${countriesData[currentIndex].country}.`;
+      consecutiveCorrectAnswers = 0;
+      comboMultiplier = 1;
     }
+    updateMultiplier();
     _('feedback').style.opacity = 1;
     if (round >= totalRounds) {
-      _('feedback').textContent += ` Game over! Your final score is ${score}.`;
+      let highScore = parseInt(localStorage.getItem('highScore')) || 0;
+      if (score > highScore) {
+        localStorage.setItem('highScore', score);
+        highScore = score;
+      }
+      _('feedback').textContent += ` Game over! Your final score is ${score}. High Score: ${highScore}.`;
       _('restart-game').style.display = 'block'; // Show restart button
     } else {
       updateRound();
@@ -128,10 +150,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const restartGame = () => {
     score = 0;
     round = 1;
+    comboMultiplier = 1;
+    consecutiveCorrectAnswers = 0;
     _('score').textContent = `Score: ${score}`;
     _('round').textContent = `Round: ${round}/${totalRounds}`;
     _('feedback').textContent = '';
     _('restart-game').style.display = 'none'; // Hide restart button
+    updateMultiplier();
     nextFlag();
   };
 
